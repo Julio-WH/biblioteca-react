@@ -1,6 +1,9 @@
 import {Link} from 'react-router-dom';
-function Navbar({loggedIn}){
-    const userData = JSON.parse(localStorage.getItem('dataUser'));
+import useUser from '../hooks/useUser';
+function Navbar(){
+    
+    const {isLogged, logout} = useUser();
+
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -20,16 +23,16 @@ function Navbar({loggedIn}){
                         <li className="nav-item">
                             <Link className="nav-link" to="/autores">Autores</Link>
                         </li>
-                        {userData ? (
+                        {isLogged ? (
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                <button className="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                                    aria-expanded="false">
                                     Perfil
-                                </a>
+                                </button>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Sistema</a></li>
-                                    <li><a className="dropdown-item" href="#">Cambiar Pasword</a></li>
-                                    <li><a className="dropdown-item" href="#">Cerrar Sesion</a></li>
+                                    <li><button className="dropdown-item" onClick={() => console.log('Sistema')}>Sistema</button></li>
+                                    <li><button className="dropdown-item" onClick={() => console.log('Cambiar Pasword')}>Cambiar Pasword</button></li>
+                                    <Link className="dropdown-item" to="/login" onClick={logout} >Cerrar Sesion</Link>
                                 </ul>
                             </li>
 

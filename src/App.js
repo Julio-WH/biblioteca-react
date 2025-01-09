@@ -1,15 +1,17 @@
 import Navbar from "./components/Navbar";
 import {RouteNavigator} from "./routes/RouterNavigator";
-import React, {useState} from "react";
+import {UserContextProvider} from "./context/UserContext";
 
 function App() {
-    const [loggedIn, setLoggedIn] = useState(false);
+  
   return (
     <div className="App">
-        <Navbar loggedIn={loggedIn}/>
+      <UserContextProvider>
+        <Navbar />
         <div className="conteiner m-4">
-            <RouteNavigator setLoggedIn={setLoggedIn} />
+            <RouteNavigator />
         </div>
+        </UserContextProvider>
     </div>
   );
 }
